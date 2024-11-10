@@ -4,6 +4,7 @@
 # include "Attributes.h"
 # include "Player.h"
 
+
 class AIPlayer: public Player{
     protected:
         //Id identificativo del jugador
@@ -76,5 +77,33 @@ class AIPlayer: public Player{
          * La propuesta es solo sugerencia, los parámetros de la declaración podrían variar.
          */
         //double Poda_AlfaBeta(const Parchis &actual, int jugador, int profundidad, int profundidad_max, color &c_piece, int &id_piece, int &dice, double alpha, double beta, double (*heuristic)(const Parchis &, int)) const;
+
+
+        /**
+        * @brief Función que se encarga de decidir el mejor movimiento posible a
+        * partir del estado actual del tablero. Asigna a las variables pasadas por
+        * referencia el valor de color de ficha, id de ficha y dado del mejor movimiento.
+        *
+        * @param c_piece Color de la ficha
+        * @param id_piece Id de la ficha
+        * @param dice Número de dado
+        */
+
+
+        void thinkAleatorio(color & c_piece,int & id_piece, int & dice) const;
+        void thinkAleatorioMasInteligente(color &c_piece, int &id_piece, int &dice) const;
+        void thinkFichaMasAdelantada(color &c_piece, int &id_piece, int &dice) const;
+        void thinkMejorOpcion(color &c_piece, int &id_piece, int &dice) const;
+        
+        //Primera heurística: 
+        static double ValoracionTestUno(const Parchis &estado, int jugador);
+        static double ValoracionTestDos(const Parchis &estado, int jugador);
+        static double ValoracionTestTres(const Parchis &estado, int jugador);
+
+        //Poda:
+        double PodaAlfaBeta(const Parchis &estado, int jugador, int prof, int prof_max, color &c_piece, int &id_piece, int &dice, double alpha, double beta, double (*heurística)(const Parchis &, int)) const;
+
+
+
 };
 #endif
